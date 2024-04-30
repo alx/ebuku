@@ -878,8 +878,8 @@ This cache is populated by the `ebuku-update-tags-cache' command.")
     (setq title (read-from-minibuffer "Bookmark title? " title))
     (setq tags (mapconcat
                 #'identity
-                (cons (format-time-string "%Y%m%d")
-                      (completing-read-multiple "Bookmark tag(s)? " ebuku-tags))
+                (append (list (format-time-string "%Y%m%d"))
+                        (completing-read-multiple "Bookmark tag3? " ebuku-tags))
                 ","))
     (setq comment (read-from-minibuffer "Bookmark comment? " comment))
     (if ebuku-retrieve-url-metadata
