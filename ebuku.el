@@ -85,6 +85,9 @@
 ;; * `T' - Copy the title of the bookmark at point to the kill ring
 ;;   (`ebuku-copy-title').
 
+;; * `c' - Copy the comment of the bookmark at point to the kill ring
+;;   (`ebuku-copy-comment').
+
 ;; * `I' - Copy the index of the bookmark at point to the kill ring
 ;;   (`ebuku-copy-index').
 
@@ -336,6 +339,7 @@ Using `sqlite' rather than `buku' can be several times faster, but the
     (define-key km (kbd "C") #'ebuku-copy-url)
     (define-key km (kbd "I") #'ebuku-copy-index)
     (define-key km (kbd "T") #'ebuku-copy-title)
+    (define-key km (kbd "c") #'ebuku-copy-comment)
     (define-key km [mouse-1] #'ebuku-open-url)
     (define-key km [mouse-2] #'ebuku-open-url)
     km))
@@ -461,6 +465,11 @@ Using `sqlite' rather than `buku' can be several times faster, but the
             (let ((title (get-char-property (point) 'data)))
               (kill-new title)
               (message "Copied: %s" title)))
+           ((eq component 'comment)
+            (goto-char (next-single-property-change (point) 'data))
+            (let ((comment (get-char-property (point) 'data)))
+              (kill-new comment)
+              (message "Copied: %s" comment)))
            ((eq component 'url)
             (forward-line)
             (goto-char (next-single-property-change (point) 'data))
@@ -922,6 +931,11 @@ This cache is populated by the `ebuku-update-tags-cache' command.")
   "Copy the title of the bookmark at point to the kill ring."
   (interactive)
   (ebuku--copy-component 'title))
+
+(defun ebuku-copy-comment ()
+  "Copy the comment of the bookmark at point to the kill ring."
+  (interactive)
+  (ebuku--copy-component 'comment))
 
 (defun ebuku-copy-url ()
   "Copy the URL of the bookmark at point to the kill ring."
