@@ -85,7 +85,7 @@
 ;; * `T' - Copy the title of the bookmark at point to the kill ring
 ;;   (`ebuku-copy-title').
 
-;; * `c' - Copy the comment of the bookmark at point to the kill ring
+;; * `U' - Copy the comment of the bookmark at point to the kill ring
 ;;   (`ebuku-copy-comment').
 
 ;; * `I' - Copy the index of the bookmark at point to the kill ring
@@ -339,7 +339,7 @@ Using `sqlite' rather than `buku' can be several times faster, but the
     (define-key km (kbd "C") #'ebuku-copy-url)
     (define-key km (kbd "I") #'ebuku-copy-index)
     (define-key km (kbd "T") #'ebuku-copy-title)
-    (define-key km (kbd "c") #'ebuku-copy-comment)
+    (define-key km (kbd "U") #'ebuku-copy-comment)
     (define-key km [mouse-1] #'ebuku-open-url)
     (define-key km [mouse-2] #'ebuku-open-url)
     km))
